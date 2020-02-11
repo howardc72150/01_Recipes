@@ -25,9 +25,24 @@ def num_check(question):
 
 # Main routine:
 
-serving_size = num_check("What is the recipe serving size? ")
-desired_size = num_check("How many servings are needed? ")
+dodgy_sf = "yes"
+while dodgy_sf == "yes":
 
-scale_factor = desired_size / serving_size
+    serving_size = num_check("What is the recipe serving size? ")
+    desired_size = num_check("How many servings are needed? ")
+
+    scale_factor = desired_size / serving_size
+
+    if scale_factor < 0.25:
+        dodgy_sf = input("Warning: This scale factor is very small "
+                      "and you might struggle to accurately weigh "
+                      "the ingredients. \n"
+                      "Do you want to fix this and make more servings? ").lower()
+    elif scale_factor > 4:
+        dodgy_sf = input("Warning: This scale factor is quite large - you might"
+                    "have issues with mixing bowl space / oven space. \n"
+                    "Do you want to fix this and make a smaller batch?").lower()
+    else:
+        dodgy_sf = "no"
 
 print("Scale factor: {}".format(scale_factor))
