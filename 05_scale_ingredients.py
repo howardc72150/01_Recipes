@@ -49,7 +49,7 @@ def not_blank(question, error_msg, num_ok):
 # Main routine:
 
 # Replace line below with component 3 in due course:
-scale_factor = float(input("Scale Factor: "))
+scale_factor = eval(input("Scale Factor: "))
 
 # Set up empty ingredient list:
 ingredients = []
@@ -73,7 +73,17 @@ while stop != "xxx":
                                    "This can't be blank",
                                    "yes")
         amount = float(amount) * scale_factor
+
+        # Remove decimal point for whole numbers
+        if amount % 1 == 0:
+            amount = int(amount)
+        elif amount * 10 % 1 == 0:
+            amount = "{:.1f}".format(amount)
+        else:
+            amount = "{:.2f}".format(amount)
+
         ingredients.append("{} units {}".format(amount, get_ingredient))
 
 # Output list:
-print(ingredients)
+for item in ingredients:
+    print(item)
